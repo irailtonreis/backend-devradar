@@ -17,16 +17,19 @@ module.exports = {
     let dev = await Dev.findOne({ github_username });
 
     if (!dev) {
-      const apiResponse = await axios.get(`https://api.github.com/users/${github_username}`);
+      const apiResponse = await axios.get(
+        `https://api.github.com/users/${github_username}`
+      );
 
-      let { name = login, avatar_url, bio } = apiResponse.data;
+      // eslint-disable-next-line no-undef
+      const { name = login, avatar_url, bio } = apiResponse.data;
 
       const techsArray = parseStringAsArray(techs);
 
       const location = {
         type: 'Point',
         coordinates: [longitude, latitude],
-      }
+      };
 
       dev = await Dev.create({
         github_username,
@@ -40,7 +43,7 @@ module.exports = {
       // o novo dev tem pelo meno uma das tecnologias filtradas
       const sendSocketMessageTo = findConnections(
         { latitude, longitude },
-        techsArray,
+        techsArray
       );
       sendMessage(sendSocketMessageTo, 'new-dev', dev);
     }
@@ -53,9 +56,10 @@ module.exports = {
 
     if (!dev) {
       return response.status(400).json({ error: 'Usuário não existe' });
-    } else {
-      dev.remove();
-      return response.status(200).json({ success: 'Usuário deletado com sucesso!' });
     }
-}
-}
+    dev.remove();
+    return response
+      .status(200)
+      .json({ success: 'Usuário deletado com sucesso!' });
+  },
+};

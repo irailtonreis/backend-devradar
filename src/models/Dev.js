@@ -9,8 +9,8 @@ const DevSchema = new mongoose.Schema({
   techs: [String],
   location: {
     type: PointSchema,
-    createIndexes: '2dsphere'
-  }
+    createIndexes: '2dsphere',
+  },
 });
 
 module.exports = mongoose.model('Dev', DevSchema);
