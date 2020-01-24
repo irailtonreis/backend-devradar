@@ -26,4 +26,4 @@ app.use(routes);
 // Body: request.body(Dados para criação ou alteração de um registro)
 // Mongo DB
 
-server.listen(3333);
+server.listen(process.env.PORT || 3000);
