@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
+const cors = require('cors'); 
 const http = require('http');
 const routes = require('./routes');
 const { setupWebsocket } = require('./websocket');
@@ -26,4 +26,4 @@ app.use(routes);
 // Body: request.body(Dados para criação ou alteração de um registro)
 // Mongo DB
 
-server.listen(process.env.PORT || 3000);
+server.listen(process.env.PORT || 3333);
